@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "ping": "node scripts/ping.js",
+    "log:60s": "node scripts/log-60s.js",
     "migrate": "node scripts/migrate.js up",
     "migrate:up": "node scripts/migrate.js up",
     "migrate:down": "node scripts/migrate.js down",
