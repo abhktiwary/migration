@@ -1,0 +1,50 @@
+# ============================================================================
+# Boltic Configuration File - execution-commands
+# ============================================================================
+# Git-based serverless app for testing Execution Commands (migrations).
+# ============================================================================
+
+app: execution-commands
+region: asia-south1
+language: nodejs/18
+entrypoint: index.js
+
+build:
+    builtin: dockerfile
+    ignorefile: .gitignore
+
+env:
+    PORT: "8080"
+
+serverlessConfig:
+    Env:
+        TestingENV: env
+    PortMap:
+        - Name: http
+          Port: 8080
+          Protocol: http
+    Scaling:
+        AutoStop: false
+        Min: 1
+        Max: 1
+        MaxIdleTime: 300
+    Resources:
+        CPU: 0.5
+        MemoryMB: 512
+        MemoryMaxMB: 512
+    Timeout: 120
+
+# ----------------------------------------------------------------------------
+# EXECUTION COMMANDS (add these in Boltic console → Execution Commands)
+# ----------------------------------------------------------------------------
+#
+# | Name            | Command                          |
+# |-----------------|----------------------------------|
+# | ping            | node scripts/ping.js             |
+# | migrate-status  | node scripts/migrate.js status   |
+# | migrate-up      | node scripts/migrate.js up       |
+# | migrate-down    | node scripts/migrate.js down     |
+#
+# No DATABASE_URL needed — migrations use local mode (no DB).
+# Search logs for: BOLTIC EXECUTION COMMAND
+# ============================================================================
